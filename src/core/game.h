@@ -42,6 +42,13 @@ public:
     void update(float dt); // 更新游戏状态
     void render(); // 渲染游戏画面
     void clean(); // 清理游戏资源
+
+    // getter and setter
+    glm::vec2 getScreanSize() const { return screan_size_; }; // 获取屏幕大小
+
+    // 工具函数
+    void drawGrid(const glm::vec2& top_left, const glm::vec2& bottom_right, float grid_width, SDL_FColor fcolor); // 绘制网格
+    void drawBoundary(const glm::vec2& top_left, const glm::vec2& bottom_right, float grid_width, SDL_FColor fcolor); // 绘制边界
 };
 
 #endif // GAME_H
