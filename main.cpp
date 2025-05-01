@@ -3,6 +3,7 @@
 #include <SDL3_image/SDL_image.h>
 #include <SDL3_mixer/SDL_mixer.h>
 #include <SDL3_ttf/SDL_ttf.h>
+#include <glm/glm.hpp>
 
 int main(int, char**) {
     std::cout << "Hello, World!" << std::endl;
@@ -19,7 +20,7 @@ int main(int, char**) {
     // SDL3_Image不需要手动初始化
 
     // 加载图片
-    SDL_Texture *texture = IMG_LoadTexture(renderer, "assets/image/bg.png");
+    SDL_Texture *texture = IMG_LoadTexture(renderer, "assets/UI/A_Back1.png");
 
     // SDL_Mixer初始化
     if (!Mix_OpenAudio(0, NULL)) {
@@ -28,7 +29,7 @@ int main(int, char**) {
     }
 
     // 读取音乐
-    Mix_Music *music = Mix_LoadMUS("assets/music/03_Racing_Through_Asteroids_Loop.ogg");
+    Mix_Music *music = Mix_LoadMUS("assets/bgm/OhMyGhost.ogg");
     // 播放音乐
     Mix_PlayMusic(music, -1);
 
@@ -45,6 +46,14 @@ int main(int, char**) {
     SDL_Surface *surface = TTF_RenderText_Solid(font, "Hello, SDL! 中文也可以", 0, color);
     SDL_Texture *textTexture = SDL_CreateTextureFromSurface(renderer, surface);
 
+    // SDL3 文本渲染
+    TTF_TextEngine *textEngine = TTF_CreateRendererTextEngine(renderer);
+    TTF_Text *text = TTF_CreateText(textEngine,font, "SDL3 新的文本渲染方式", 0);
+    TTF_SetTextColor(text,255,0,0,255);
+    TTF_SetTextWrapWidth(text,50);
+
+    glm::vec2 mousePos = glm::vec2(0,0);
+
     // Do something with the window and renderer here...
     // 渲染循环
     while (true) {
@@ -54,7 +63,17 @@ int main(int, char**) {
                 break;
             }
         }
+        auto state = SDL_GetMouseState(&mousePos.x, &mousePos.y);
+        if (state & SDL_BUTTON_LMASK)
+        {
+            SDL_Log("Left mouse button is pressed");
+        }
+        if (state & SDL_BUTTON_RMASK)
+        {
+            SDL_Log("Right mouse button is pressed");
+        }
 
+        // SDL_Log("Mouse position: %f, %f", mousePos.x, mousePos.y);
         // 清屏
         SDL_RenderClear(renderer);
         // 画一个长方形
@@ -71,6 +90,9 @@ int main(int, char**) {
         SDL_FRect textRect = {300, 300, static_cast<float>(surface->w), static_cast<float>(surface->h)};
         SDL_RenderTexture(renderer, textTexture, NULL, &textRect);
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+
+        // 画SDL3文本
+        TTF_DrawRendererText(text,400,400);
 
         // 更新屏幕
         SDL_RenderPresent(renderer);
