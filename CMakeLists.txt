@@ -27,7 +27,10 @@ find_package(SDL3_ttf REQUIRED)
 find_package(glm REQUIRED)
 
 # 添加可执行文件
-add_executable(${TARGET} main.cpp)
+add_executable(${TARGET}
+                src/main.cpp
+                src/core/game.cpp
+                src/scene_main.cpp)
 
 # 链接库
 target_link_libraries(${TARGET}
