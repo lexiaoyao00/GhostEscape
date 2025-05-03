@@ -1,9 +1,13 @@
 #include "scene_main.h"
+#include "player.h"
 
 void SceneMain::init()
 {
     world_size_ = game_.getScreanSize() * 3.0f;
-    // camera_position_ = glm::vec2{-100.0f};
+    camera_position_ = world_size_ / 2.0f - game_.getScreanSize() / 2.0f;
+    player_ = new Player();
+    player_->init();
+    player_->setPosition(world_size_ / 2.0f);
 }
 
 void SceneMain::handleEvents(SDL_Event&)
@@ -12,16 +16,19 @@ void SceneMain::handleEvents(SDL_Event&)
 
 void SceneMain::update(float dt)
 {
-    camera_position_ += glm::vec2{100.0f, 100.0f} * dt;
+    player_->update(dt);
 }
 
 void SceneMain::render()
 {
     renderBackground();
+    player_->render();
 }
 
 void SceneMain::clean()
 {
+    player_->clean();
+    delete player_;
 }
 
 void SceneMain::renderBackground()

@@ -1,6 +1,9 @@
 #include "game.h"
 #include "../scene_main.h"
-
+#include "object_screen.h"
+#include "object_world.h"
+#include "actor.h"
+#include "asset_store.h"
 
 void Game::run()
 {
@@ -58,6 +61,9 @@ void Game::init(std::string title, int width, int height)
     // 计算帧延迟
     frame_delay_ = 1000000000 / FPS; // 60 FPS
 
+    // 创建资源管理器
+    asset_store_ = new AssetStore(renderer_);
+
     // 创建场景
     current_scene_ = new SceneMain();
     current_scene_->init();
@@ -100,6 +106,10 @@ void Game::clean()
         current_scene_ = nullptr;
     }
 
+    if (asset_store_ != nullptr){
+        delete asset_store_;
+        asset_store_ = nullptr;
+    }
 
     // 释放渲染器和窗口
     if (renderer_)

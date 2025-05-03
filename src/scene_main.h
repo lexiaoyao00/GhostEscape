@@ -3,9 +3,10 @@
 
 #include "core/scene.h"
 
+class Player;
 class SceneMain : public Scene
 {
-    glm::vec2 world_size_ = glm::vec2(0);
+    Player* player_ = nullptr;
 
 public:
     SceneMain() = default;
