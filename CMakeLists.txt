@@ -30,11 +30,15 @@ find_package(glm REQUIRED)
 add_executable(${TARGET}
                 src/main.cpp
                 src/player.cpp
+                src/scene_main.cpp
+                src/core/object_affiliate.cpp
+                src/core/object.cpp
                 src/core/scene.cpp
                 src/core/game.cpp
                 src/core/asset_store.cpp
                 src/core/object_world.cpp
-                src/scene_main.cpp)
+                src/affiliate/sprite.cpp
+                src/affiliate/sprite_anime.cpp)
 
 # 链接库
 target_link_libraries(${TARGET}

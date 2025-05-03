@@ -8,27 +8,30 @@ void SceneMain::init()
     player_ = new Player();
     player_->init();
     player_->setPosition(world_size_ / 2.0f);
+
+    addChild(player_);
 }
 
-void SceneMain::handleEvents(SDL_Event&)
+void SceneMain::handleEvents(SDL_Event& event)
 {
+    Scene::handleEvents(event);
 }
 
 void SceneMain::update(float dt)
 {
-    player_->update(dt);
+    Scene::update(dt);
 }
 
 void SceneMain::render()
 {
     renderBackground();
-    player_->render();
+
+    Scene::render();
 }
 
 void SceneMain::clean()
 {
-    player_->clean();
-    delete player_;
+    Scene::clean();
 }
 
 void SceneMain::renderBackground()

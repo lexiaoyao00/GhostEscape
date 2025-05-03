@@ -4,6 +4,7 @@
 #include "object_world.h"
 #include "actor.h"
 #include "asset_store.h"
+#include "../affiliate/sprite.h"
 
 void Game::run()
 {
@@ -127,6 +128,17 @@ void Game::clean()
     TTF_Quit();
     // 退出SDL
     SDL_Quit();
+}
+
+void Game::renderTexture(const Texture &texture, const glm::vec2 &position, const glm::vec2 &size)
+{
+    SDL_FRect dst = {
+        position.x,
+        position.y,
+        size.x,
+        size.y
+    };
+    SDL_RenderTextureRotated(renderer_, texture.texture, &texture.src_rect, &dst, texture.angle, nullptr, texture.is_flip ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE);
 }
 
 void Game::drawGrid(const glm::vec2 &top_left, const glm::vec2 &bottom_right, float grid_width, SDL_FColor fcolor)

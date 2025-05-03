@@ -8,6 +8,8 @@ class ObjectWorld : public ObjectScreen
 protected:
     glm::vec2 postion_ = glm::vec2(0,0);     // position of the world
 
+    virtual void init() override { type_ = ObjectType::OBJECT_WORLD; };
+
 public:
 
     virtual void update(float dt) override;
