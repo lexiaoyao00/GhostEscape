@@ -12,6 +12,7 @@ protected:
     ObjectType type_ = ObjectType::NONE;
     Game& game_ = Game::GetInstance();
     std::vector<Object*> children_;
+    bool is_active_ = true;
 public:
     Object() = default;
     virtual ~Object() = default;    // 所有的类,不在构造函数和析构函数里面做任何事情
@@ -28,6 +29,8 @@ public:
     }
 
     // getter and setter
+    void setActive(bool active) { is_active_ = active; }
+    bool isActive() const { return is_active_; }
     ObjectType getType() const { return type_; }
     void setType(ObjectType type) { type_ = type; }
 };

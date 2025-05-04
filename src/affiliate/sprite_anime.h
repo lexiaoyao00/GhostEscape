@@ -8,7 +8,7 @@ class SpriteAnime : public Sprite
 {
     int current_frame_ = 0;
     int total_frames_ = 0;
-    int fps_ = 0;
+    int fps_ = 10;
     float frame_timer_ = 0;
 public:
     static SpriteAnime* addSpriteAnimeChild(ObjectScreen* parent, const std::string& file_path,float scale = 1.0f);
