@@ -13,6 +13,8 @@ public:
     // getter and setter
     glm::vec2 getRenderPosition() { return render_postion_; }
     virtual void setRenderPosition(glm::vec2 position) { render_postion_ = position; }
+
+    virtual glm::vec2 getPosition() const { return glm::vec2(0); }
 };
 
 

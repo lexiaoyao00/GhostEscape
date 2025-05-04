@@ -1,6 +1,6 @@
 #include "sprite_anime.h"
 
-SpriteAnime *SpriteAnime::addSpriteAnimeChild(ObjectScreen *parent, const std::string &file_path, float scale)
+SpriteAnime *SpriteAnime::addSpriteAnimeChild(ObjectScreen *parent, const std::string &file_path, float scale, Anchor anchor)
 {
     auto sprite_anime = new SpriteAnime();
     sprite_anime->init();

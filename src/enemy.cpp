@@ -1,6 +1,8 @@
 #include "enemy.h"
 #include "affiliate/sprite_anime.h"
 #include "core/scene.h"
+#include "affiliate/collider.h"
+
 
 void Enemy::init()
 {
@@ -13,6 +15,8 @@ void Enemy::init()
     anim_dead_->setLoop(false);
 
     current_anim_ = anim_normal_;
+
+    collider_ = Collider::addColliderChild(this,anim_normal_->getSize());
 }
 
 void Enemy::update(float dt)
@@ -20,15 +24,7 @@ void Enemy::update(float dt)
     Actor::update(dt);
     aimTagert(target_);
     move(dt);
-
-    timer_ += dt;
-    if (timer_ > 2.0f && timer_ < 4.0f) {
-        changeState(State::HURT);
-    }
-    else if (timer_ > 4.0f) {
-        changeState(State::DEAD);
-    }
-    remove();
+    attack();
 }
 
 void Enemy::aimTagert(Player *target)
@@ -70,6 +66,17 @@ void Enemy::changeState(State new_state)
     }
     current_state_ = new_state;
 
+}
+
+void Enemy::attack()
+{
+    if (!collider_ || target_->getCollider() == nullptr) return;
+
+    if (collider_->isColliding(target_->getCollider()))
+    {
+        // TODO:attack
+        SDL_Log("attack");
+    }
 }
 
 void Enemy::remove()

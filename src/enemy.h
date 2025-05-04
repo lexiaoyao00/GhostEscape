@@ -19,8 +19,6 @@ class Enemy : public Actor
     SpriteAnime *anim_dead_ = nullptr;
     SpriteAnime *current_anim_ = nullptr;
 
-    float timer_ = 0.0f;
-
 public:
     virtual void init() override;
     virtual void update(float dt) override;
@@ -29,6 +27,7 @@ public:
 
     void checkState();
     void changeState(State new_state);
+    void attack();
     void remove();
 
     // getters and setters

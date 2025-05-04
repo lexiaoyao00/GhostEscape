@@ -1,6 +1,7 @@
 #ifndef DEFS_H
 #define DEFS_H
 
+#define DEBUG_MODE
 
 enum class ObjectType
 {
@@ -9,6 +10,19 @@ enum class ObjectType
     OBJECT_WORLD,
 };
 
+enum class Anchor
+{
+    NONE,
+    TOP_LEFT,
+    TOP_CENTER,
+    TOP_RIGHT,
+    CENTER_LEFT,
+    CENTER,
+    CENTER_RIGHT,
+    BOTTOM_LEFT,
+    BOTTOM_CENTER,
+    BOTTOM_RIGHT,
+};
 
 
 #endif // DEFS_H

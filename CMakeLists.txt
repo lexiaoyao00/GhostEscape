@@ -40,7 +40,8 @@ add_executable(${TARGET}
                 src/core/asset_store.cpp
                 src/core/object_world.cpp
                 src/affiliate/sprite.cpp
-                src/affiliate/sprite_anime.cpp)
+                src/affiliate/sprite_anime.cpp
+                src/affiliate/collider.cpp)
 
 # 链接库
 target_link_libraries(${TARGET}

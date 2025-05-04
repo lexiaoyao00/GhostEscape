@@ -13,7 +13,7 @@ class SpriteAnime : public Sprite
     bool is_loop_ = true;
 
 public:
-    static SpriteAnime* addSpriteAnimeChild(ObjectScreen* parent, const std::string& file_path,float scale = 1.0f);
+    static SpriteAnime* addSpriteAnimeChild(ObjectScreen* parent, const std::string& file_path,float scale = 1.0f, Anchor anchor = Anchor::CENTER);
     virtual void update(float dt) override;
 
     virtual void setTexture(Texture texture) override;
