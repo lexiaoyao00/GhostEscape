@@ -24,19 +24,55 @@ void Scene::update(float dt)
 {
     Object::update(dt);
 
-    for (ObjectScreen *child : children_world_)
-    {
-        if (child->isActive()) {
-            child->update(dt);
-        }
-    }
-    for (ObjectScreen *child : children_screen_)
-    {
-        if (child->isActive()) {
-            child->update(dt);
-        }
-    }
+    // for (ObjectScreen *child : children_world_)
+    // {
+    //     if (child->isActive()) {
+    //         child->update(dt);
+    //     }
+    // }
+    // for (ObjectScreen *child : children_screen_)
+    // {
+    //     if (child->isActive()) {
+    //         child->update(dt);
+    //     }
+    // }
 
+    for (auto it = children_world_.begin(); it != children_world_.end();)
+    {
+        auto child = *it;
+        if (child->needRemove())
+        {
+            it = children_world_.erase(it);
+            child->clean();
+            delete child;
+        }
+        else
+        {
+            if (child->isActive())
+            {
+                child->update(dt);
+            }
+            ++it;
+        }
+    }
+    for (auto it = children_screen_.begin(); it != children_screen_.end();)
+    {
+        auto child = *it;
+        if (child->needRemove())
+        {
+            it = children_screen_.erase(it);
+            child->clean();
+            delete child;
+        }
+        else
+        {
+            if (child->isActive())
+            {
+                child->update(dt);
+            }
+            ++it;
+        }
+    }
 }
 
 void Scene::render()

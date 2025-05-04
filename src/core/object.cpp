@@ -1,10 +1,11 @@
 #include "object.h"
 
-void Object::handleEvents(SDL_Event & event)
+void Object::handleEvents(SDL_Event &event)
 {
     for (auto &child : children_)
     {
-        if (child->isActive()) {
+        if (child->isActive())
+        {
             child->handleEvents(event);
         }
     }
@@ -12,10 +13,22 @@ void Object::handleEvents(SDL_Event & event)
 
 void Object::update(float dt)
 {
-    for (auto &child : children_)
+    for (auto it = children_.begin(); it != children_.end();)
     {
-        if (child->isActive()) {
-            child->update(dt);
+        auto child = *it;
+        if (child->needRemove())
+        {
+            it = children_.erase(it);
+            child->clean();
+            delete child;
+        }
+        else
+        {
+            if (child->isActive())
+            {
+                child->update(dt);
+            }
+            ++it;
         }
     }
 }
@@ -24,7 +37,8 @@ void Object::render()
 {
     for (auto &child : children_)
     {
-        if (child->isActive()) {
+        if (child->isActive())
+        {
             child->render();
         }
     }

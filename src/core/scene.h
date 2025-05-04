@@ -27,7 +27,7 @@ public:
     virtual void clean() override;
 
     virtual void addChild(Object* child) override;
-    virtual void removeChild(Object* child) override;
+    virtual void removeChild(Object* child) override; // 将子对象从容器中移除
 
     glm::vec2 worldToScreen(const glm::vec2& world_position) const { return world_position - camera_position_; }
     glm::vec2 screenToWorld(const glm::vec2& screen_position) const { return screen_position + camera_position_; }

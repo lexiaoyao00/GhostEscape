@@ -10,6 +10,10 @@ protected:
     float max_speed_ = 100.0f;                   // 最大速度
 
 public:
+    // tools
+    void move(float dt);
+
+
     // getters and setters
     glm::vec2 getVelocity() const { return velocity_; }
     void setVelocity(const glm::vec2& velocity) { velocity_ = velocity; }

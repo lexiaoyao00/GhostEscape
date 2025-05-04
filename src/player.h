@@ -17,7 +17,6 @@ public:
     virtual void clean() override;
 
     void keyboardControl();
-    void move(float dt);
     void syncCamera();
     void checkState();
     void changeState(bool is_moving);

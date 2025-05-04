@@ -6,7 +6,7 @@
 class ObjectWorld : public ObjectScreen
 {
 protected:
-    glm::vec2 postion_ = glm::vec2(0,0);     // position of the world
+    glm::vec2 position_ = glm::vec2(0,0);     // position of the world
 
     virtual void init() override { type_ = ObjectType::OBJECT_WORLD; };
 
@@ -15,7 +15,7 @@ public:
     virtual void update(float dt) override;
 
     // getter and setter
-    glm::vec2 getPostion() { return postion_; }
+    glm::vec2 getPosition() { return position_; }
     void setPosition(glm::vec2 p);
     virtual void setRenderPosition(glm::vec2 renderPosition) override;
 };

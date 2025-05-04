@@ -30,7 +30,9 @@ find_package(glm REQUIRED)
 add_executable(${TARGET}
                 src/main.cpp
                 src/player.cpp
+                src/enemy.cpp
                 src/scene_main.cpp
+                src/core/actor.cpp
                 src/core/object_affiliate.cpp
                 src/core/object.cpp
                 src/core/scene.cpp
