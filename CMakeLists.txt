@@ -32,6 +32,7 @@ add_executable(${TARGET}
                 src/player.cpp
                 src/enemy.cpp
                 src/scene_main.cpp
+                src/spawner.cpp
                 src/core/actor.cpp
                 src/core/object_affiliate.cpp
                 src/core/object.cpp
@@ -42,7 +43,8 @@ add_executable(${TARGET}
                 src/affiliate/sprite.cpp
                 src/affiliate/sprite_anime.cpp
                 src/affiliate/collider.cpp
-                src/raw/stats.cpp)
+                src/raw/stats.cpp
+                src/world/effect.cpp)
 
 # 链接库
 target_link_libraries(${TARGET}

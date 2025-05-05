@@ -28,7 +28,7 @@ public:
 
     // tools
     void takeDamage(float damage);
-    bool isAlive() const;
+    bool getAlive() const;
 };
 
 

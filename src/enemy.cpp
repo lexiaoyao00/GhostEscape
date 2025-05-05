@@ -4,6 +4,18 @@
 #include "affiliate/collider.h"
 #include "raw/stats.h"
 
+Enemy *Enemy::addEnemyChild(Object *parent, glm::vec2 pos, Player *target)
+{
+    auto enemy = new Enemy();
+    enemy->init();
+    enemy->setPosition(pos);
+    enemy->setTarget(target);
+
+    if (parent) parent->safeAddChild(enemy);
+
+    return enemy;
+}
+
 void Enemy::init()
 {
     Actor::init();
@@ -24,9 +36,13 @@ void Enemy::init()
 void Enemy::update(float dt)
 {
     Actor::update(dt);
-    aimTagert(target_);
-    move(dt);
-    attack();
+
+    if (target_->getActive())
+    {
+        aimTagert(target_);
+        move(dt);
+        attack();
+    }
 }
 
 void Enemy::aimTagert(Player *target)
@@ -72,7 +88,7 @@ void Enemy::changeState(State new_state)
 
 void Enemy::attack()
 {
-    if (!collider_ || target_->getCollider() == nullptr) return;
+    if (!collider_ || !target_ || target_->getCollider() == nullptr) return;
 
     if (collider_->isColliding(target_->getCollider()))
     {

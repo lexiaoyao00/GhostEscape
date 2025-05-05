@@ -7,13 +7,13 @@ void Scene::handleEvents(SDL_Event &event)
 
     for (ObjectScreen *child : children_screen_)
     {
-        if (child->isActive()) {
+        if (child->getActive()) {
             child->handleEvents(event);
         }
     }
     for (ObjectScreen *child : children_world_)
     {
-        if (child->isActive()) {
+        if (child->getActive()) {
             child->handleEvents(event);
         }
     }
@@ -26,13 +26,13 @@ void Scene::update(float dt)
 
     // for (ObjectScreen *child : children_world_)
     // {
-    //     if (child->isActive()) {
+    //     if (child->getActive()) {
     //         child->update(dt);
     //     }
     // }
     // for (ObjectScreen *child : children_screen_)
     // {
-    //     if (child->isActive()) {
+    //     if (child->getActive()) {
     //         child->update(dt);
     //     }
     // }
@@ -45,10 +45,11 @@ void Scene::update(float dt)
             it = children_world_.erase(it);
             child->clean();
             delete child;
+            child = nullptr;
         }
         else
         {
-            if (child->isActive())
+            if (child->getActive())
             {
                 child->update(dt);
             }
@@ -63,10 +64,11 @@ void Scene::update(float dt)
             it = children_screen_.erase(it);
             child->clean();
             delete child;
+            child = nullptr;
         }
         else
         {
-            if (child->isActive())
+            if (child->getActive())
             {
                 child->update(dt);
             }
@@ -81,13 +83,13 @@ void Scene::render()
 
     for (ObjectScreen *child : children_world_)
     {
-        if (child->isActive()) {
+        if (child->getActive()) {
             child->render();
         }
     }
     for (ObjectScreen *child : children_screen_)
     {
-        if (child->isActive()) {
+        if (child->getActive()) {
             child->render();
         }
     }

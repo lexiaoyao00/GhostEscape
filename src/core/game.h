@@ -7,6 +7,7 @@
 #include <SDL3_ttf/SDL_ttf.h>
 #include <glm/glm.hpp>
 
+#include <random>
 #include <string>
 
 #include "asset_store.h"
@@ -26,6 +27,9 @@ class Game
 
     SDL_Window* window_ = nullptr;  //  窗口
     SDL_Renderer* renderer_ = nullptr;  // 渲染器
+
+    // 随机数生成器
+    std::mt19937 gen_ = std::mt19937(std::random_device{}());
 
     Game() = default;
     ~Game() = default;
@@ -58,6 +62,17 @@ public:
     // 工具函数
     void drawGrid(const glm::vec2& top_left, const glm::vec2& bottom_right, float grid_width, SDL_FColor fcolor); // 绘制网格
     void drawBoundary(const glm::vec2& top_left, const glm::vec2& bottom_right, float grid_width, SDL_FColor fcolor); // 绘制边界
+
+    // 随机数生成函数
+    float randomFloat(float min, float max) { return std::uniform_real_distribution<float>(min, max)(gen_); } // 生成随机浮点数
+    int randomInt(int min, int max) { return std::uniform_int_distribution<int>(min, max)(gen_); } // 生成随机整数
+
+    glm::vec2 randomVec2(const glm::vec2& top_left, const glm::vec2& bottom_right) {
+        return glm::vec2(randomFloat(top_left.x, bottom_right.x), randomFloat(top_left.y, bottom_right.y));
+    }
+    glm::ivec2 randomIVec2(const glm::ivec2& top_left, const glm::ivec2& bottom_right) {
+        return glm::ivec2(randomInt(top_left.x, bottom_right.x), randomInt(top_left.y, bottom_right.y));
+    }
 };
 
 #endif // GAME_H

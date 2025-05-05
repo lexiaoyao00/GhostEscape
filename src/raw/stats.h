@@ -38,8 +38,8 @@ public:
     float getMaxMana() const { return max_mana_; }
     float getManaRegen() const { return mana_regen_; }
     float getDamage() const { return damage_; }
-    bool isAlive() const { return is_alive_; }
-    bool isInvincible() const { return is_invincible_; }
+    bool getAlive() const { return is_alive_; }
+    bool getInvincible() const { return is_invincible_; }
     float getInvincibleTime() const { return invincible_time_; }
 
     void setParent(Actor* parent) { this->parent_ = parent; }

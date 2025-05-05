@@ -1,6 +1,8 @@
 #include "scene_main.h"
 #include "player.h"
 #include "enemy.h"
+#include "world/effect.h"
+#include "spawner.h"
 
 void SceneMain::init()
 {
@@ -9,14 +11,22 @@ void SceneMain::init()
     player_ = new Player();
     player_->init();
     player_->setPosition(world_size_ / 2.0f);
-
     addChild(player_);
 
-    auto enemy = new Enemy();
-    enemy->init();
-    enemy->setTarget(player_);
-    enemy->setPosition(world_size_ / 2.0f + glm::vec2(200.0f));
-    addChild(enemy);
+    spawner_ = new Spawner();
+    spawner_->init();
+    spawner_->setTarget(player_);
+    addChild(spawner_);
+
+
+    // glm::vec2 pos = world_size_ / 2.0f + glm::vec2(200.0f);
+    // auto enemy = new Enemy();
+    // enemy->init();
+    // enemy->setTarget(player_);
+    // enemy->setPosition(pos);
+    // // addChild(enemy);
+
+    // Effect::addEffectChild(this, "assets/effect/184_3.png", pos, 2.0f, enemy);
 
 }
 

@@ -3,11 +3,13 @@
 
 #include "core/actor.h"
 #include "affiliate/sprite_anime.h"
+#include "world/effect.h"
 
 class Player : public Actor
 {
     SpriteAnime* sprite_idle_ = nullptr;
     SpriteAnime* sprite_move_ = nullptr;
+    Effect* dead_effect_ = nullptr;
     bool is_moving_ = false;
 public:
     virtual void init() override;
@@ -20,6 +22,7 @@ public:
     void syncCamera();
     void checkState();
     void changeState(bool is_moving);
+    void checkIsDead();
 };
 
 

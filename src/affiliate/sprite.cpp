@@ -15,7 +15,7 @@ Sprite *Sprite::addSpriteChild(ObjectScreen *parent, const std::string &file_pat
     sprite->setScale(scale);
     sprite->setParent(parent);
 
-    parent->addChild(sprite);
+    if (parent) parent->addChild(sprite);
     return sprite;
 }
 

@@ -9,7 +9,7 @@ SpriteAnime *SpriteAnime::addSpriteAnimeChild(ObjectScreen *parent, const std::s
     sprite_anime->setScale(scale);
     sprite_anime->setParent(parent);
 
-    parent->addChild(sprite_anime);
+    if (parent) parent->addChild(sprite_anime);
 
     return sprite_anime;
 }
