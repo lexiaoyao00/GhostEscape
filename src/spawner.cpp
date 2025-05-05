@@ -5,6 +5,8 @@
 
 void Spawner::update(float dt)
 {
+    Object::update(dt);
+
     if (!target_ || !target_->getActive()) return;
 
     timer_ += dt;

@@ -5,11 +5,12 @@
 
 class Spawner;
 class Player;
+class UIMouse;
 class SceneMain : public Scene
 {
     Player* player_ = nullptr;
     Spawner* spawner_ = nullptr;
-
+    UIMouse* ui_mouse_ = nullptr;
 public:
     SceneMain() = default;
     ~SceneMain() = default;

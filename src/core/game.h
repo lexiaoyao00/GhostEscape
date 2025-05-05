@@ -17,7 +17,11 @@ class Scene;
 class Game
 {
     AssetStore* asset_store_ = nullptr; // 资源管理器
-    glm::vec2 screan_size_ = glm::vec2(0);
+    glm::vec2 screan_size_ = glm::vec2(0);  // 屏幕大小
+
+    glm::vec2 mouse_position_ = glm::vec2(0);    // 鼠标位置
+    SDL_MouseButtonFlags mouse_buttons_ = 0; // 鼠标按键状态
+
     bool is_running_ = true; // 游戏是否运行
     Scene* current_scene_ = nullptr; // 当前场景
 
@@ -54,6 +58,8 @@ public:
     glm::vec2 getScreanSize() const { return screan_size_; }; // 获取屏幕大小
     Scene* getCurrentScene() const { return current_scene_; }; // 获取当前场景
     AssetStore* getAssetStore() const { return asset_store_; }; // 获取资源管理器
+    glm::vec2 getMousePosition() const { return mouse_position_; }; // 获取鼠标位置
+    SDL_MouseButtonFlags getMouseButtons() const { return mouse_buttons_; }; // 获取鼠标按键状态
 
     // 渲染函数
     void renderTexture(const Texture& texture, const glm::vec2& position, const glm::vec2& size); // 渲染纹理

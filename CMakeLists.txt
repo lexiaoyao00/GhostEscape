@@ -44,7 +44,8 @@ add_executable(${TARGET}
                 src/affiliate/sprite_anime.cpp
                 src/affiliate/collider.cpp
                 src/raw/stats.cpp
-                src/world/effect.cpp)
+                src/world/effect.cpp
+                src/screen/UI_mouse.cpp)
 
 # 链接库
 target_link_libraries(${TARGET}
