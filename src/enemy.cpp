@@ -2,7 +2,7 @@
 #include "affiliate/sprite_anime.h"
 #include "core/scene.h"
 #include "affiliate/collider.h"
-
+#include "raw/stats.h"
 
 void Enemy::init()
 {
@@ -17,6 +17,8 @@ void Enemy::init()
     current_anim_ = anim_normal_;
 
     collider_ = Collider::addColliderChild(this,anim_normal_->getSize());
+    stats_ = Stats::addStatsChild(this);
+
 }
 
 void Enemy::update(float dt)
@@ -74,8 +76,10 @@ void Enemy::attack()
 
     if (collider_->isColliding(target_->getCollider()))
     {
-        // TODO:attack
-        SDL_Log("attack");
+        if (stats_ && target_->getStats())
+        {
+            target_->takeDamage(stats_->getDamage());
+        }
     }
 }
 
