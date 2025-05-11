@@ -4,9 +4,11 @@
 
 #include "../core/object_affiliate.h"
 
+class Spell;
 class Collider : public ObjectAffiliate
 {
 protected:
+    friend Spell;
     enum class Type
     {
         CIRCLE,         // size_ 的 x 轴为直径,默认 y = x

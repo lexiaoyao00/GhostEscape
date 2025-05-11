@@ -19,7 +19,7 @@ class Game
     AssetStore* asset_store_ = nullptr; // 资源管理器
     glm::vec2 screan_size_ = glm::vec2(0);  // 屏幕大小
 
-    glm::vec2 mouse_position_ = glm::vec2(0);    // 鼠标位置
+    glm::vec2 mouse_position_ = glm::vec2(0);    // 鼠标位置,屏幕坐标
     SDL_MouseButtonFlags mouse_buttons_ = 0; // 鼠标按键状态
 
     bool is_running_ = true; // 游戏是否运行

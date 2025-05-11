@@ -45,6 +45,7 @@ add_executable(${TARGET}
                 src/affiliate/collider.cpp
                 src/raw/stats.cpp
                 src/world/effect.cpp
+                src/world/spell.cpp
                 src/screen/UI_mouse.cpp)
 
 # 链接库

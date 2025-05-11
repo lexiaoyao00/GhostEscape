@@ -31,6 +31,8 @@ void Enemy::init()
     collider_ = Collider::addColliderChild(this,anim_normal_->getSize());
     stats_ = Stats::addStatsChild(this);
 
+    setType(ObjectType::ENEMY);
+
 }
 
 void Enemy::update(float dt)
@@ -43,6 +45,8 @@ void Enemy::update(float dt)
         move(dt);
         attack();
     }
+    checkState();
+    remove();
 }
 
 void Enemy::aimTagert(Player *target)
@@ -55,12 +59,17 @@ void Enemy::aimTagert(Player *target)
 
 void Enemy::checkState()
 {
+    State new_state;
+    if (stats_->getHealth() <= 0 ) new_state = State::DEAD;
+    else if (stats_->getInvincible()) new_state = State::HURT;
+    else new_state = State::NORMAL;
+
+    if (new_state != current_state_) changeState(new_state);
+
 }
 
 void Enemy::changeState(State new_state)
 {
-    if (current_state_ == new_state) return;
-
     current_anim_->setActive(false);
     switch (new_state)
     {

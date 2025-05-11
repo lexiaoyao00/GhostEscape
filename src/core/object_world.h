@@ -14,6 +14,10 @@ public:
     virtual void init() override { type_ = ObjectType::OBJECT_WORLD; };
     virtual void update(float dt) override;
 
+    // tools
+    virtual void takeDamage(float) {return;}
+
+
     // getter and setter
     virtual glm::vec2 getPosition() const override { return position_; }
     void setPosition(glm::vec2 p);

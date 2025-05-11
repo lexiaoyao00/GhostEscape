@@ -13,6 +13,8 @@ protected:
 
 public:
     // tools
+    virtual void takeDamage(float damage) override;
+    bool getAlive() const;
     void move(float dt);
 
 
@@ -26,9 +28,6 @@ public:
     float getMaxSpeed() const { return max_speed_; }
     void setMaxSpeed(float max_speed) { max_speed_ = max_speed; }
 
-    // tools
-    void takeDamage(float damage);
-    bool getAlive() const;
 };
 
 
