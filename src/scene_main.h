@@ -6,11 +6,13 @@
 class Spawner;
 class Player;
 class UIMouse;
+class HUDStats;
 class SceneMain : public Scene
 {
     Player* player_ = nullptr;
     Spawner* spawner_ = nullptr;
     UIMouse* ui_mouse_ = nullptr;
+    HUDStats* hud_stats_ = nullptr;
 public:
     SceneMain() = default;
     ~SceneMain() = default;

@@ -5,6 +5,7 @@
 #include "spawner.h"
 #include "screen/UI_mouse.h"
 #include "world/spell.h"
+#include "screen/hud_stats.h"
 
 void SceneMain::init()
 {
@@ -23,14 +24,8 @@ void SceneMain::init()
     addChild(spawner_);
 
     ui_mouse_ = UIMouse::addUIMouseChild(this,"assets/UI/29.png","assets/UI/30.png", 1.0f, Anchor::CENTER);
-    // glm::vec2 pos = world_size_ / 2.0f + glm::vec2(200.0f);
-    // auto enemy = new Enemy();
-    // enemy->init();
-    // enemy->setTarget(player_);
-    // enemy->setPosition(pos);
-    // // addChild(enemy);
 
-    // Effect::addEffectChild(this, "assets/effect/184_3.png", pos, 2.0f, enemy);
+    hud_stats_ = HUDStats::addHUDStatsChild(this, player_, glm::vec2(30.0f));
 
 }
 

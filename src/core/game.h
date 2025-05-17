@@ -62,7 +62,7 @@ public:
     SDL_MouseButtonFlags getMouseButtons() const { return mouse_buttons_; }; // 获取鼠标按键状态
 
     // 渲染函数
-    void renderTexture(const Texture& texture, const glm::vec2& position, const glm::vec2& size); // 渲染纹理
+    void renderTexture(const Texture& texture, const glm::vec2& position, const glm::vec2& size, const glm::vec2 &mask = glm::vec2(1.0f)); // 渲染纹理
     void renderFillCircle(const glm::vec2& position, const glm::vec2& size, float alpha);
     void renderHBar(const glm::vec2& position, const glm::vec2& size, float percent, SDL_FColor color); // 渲染水平条形进度条
 

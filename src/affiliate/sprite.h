@@ -21,6 +21,7 @@ class Sprite : public ObjectAffiliate
 protected:
     Texture texture_;
     bool is_finish_ = false;
+    glm::vec2 percentage_ = glm::vec2(1.0f);
 
 public:
     static Sprite* addSpriteChild(ObjectScreen* parent, const std::string& file_path, float scale = 1.0f, Anchor anchor = Anchor::CENTER);
@@ -37,6 +38,8 @@ public:
     float getAngle() const { return texture_.angle; }
     bool getFinish() const { return is_finish_; }
     void setFinish(bool is_finish) { is_finish_ = is_finish; }
+    glm::vec2 getPercentage() const { return percentage_; }
+    void setPercentage(glm::vec2 percentage) { percentage_ = percentage; }
 };
 
 
