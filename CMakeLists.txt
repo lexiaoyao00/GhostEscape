@@ -33,6 +33,7 @@ add_executable(${TARGET}
                 src/enemy.cpp
                 src/scene_main.cpp
                 src/spawner.cpp
+                src/weapon_thunder.cpp
                 src/core/actor.cpp
                 src/core/object_affiliate.cpp
                 src/core/object.cpp
@@ -44,6 +45,7 @@ add_executable(${TARGET}
                 src/affiliate/sprite_anime.cpp
                 src/affiliate/collider.cpp
                 src/raw/stats.cpp
+                src/raw/weapon.cpp
                 src/world/effect.cpp
                 src/world/spell.cpp
                 src/screen/UI_mouse.cpp)

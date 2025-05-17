@@ -58,7 +58,7 @@ public:
     glm::vec2 getScreanSize() const { return screan_size_; }; // 获取屏幕大小
     Scene* getCurrentScene() const { return current_scene_; }; // 获取当前场景
     AssetStore* getAssetStore() const { return asset_store_; }; // 获取资源管理器
-    glm::vec2 getMousePosition() const { return mouse_position_; }; // 获取鼠标位置
+    glm::vec2 getMousePosition() const { return mouse_position_; }; // 获取鼠标位置,相对于屏幕
     SDL_MouseButtonFlags getMouseButtons() const { return mouse_buttons_; }; // 获取鼠标按键状态
 
     // 渲染函数

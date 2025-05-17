@@ -37,15 +37,6 @@ void SceneMain::init()
 void SceneMain::handleEvents(SDL_Event& event)
 {
     Scene::handleEvents(event);
-    if (event.type == SDL_EVENT_MOUSE_BUTTON_DOWN)
-    {
-        if (event.button.button == SDL_BUTTON_LEFT)
-        {
-            auto pos = game_.getMousePosition() + camera_position_;
-            Spell::addSpellChild(this, "assets/effect/Thunderstrike w blur.png", pos, 100.0f, 3.0f,Anchor::CENTER);
-        }
-
-    }
 }
 
 void SceneMain::update(float dt)

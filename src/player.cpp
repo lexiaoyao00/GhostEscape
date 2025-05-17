@@ -17,6 +17,7 @@ void Player::init()
     stats_ = Stats::addStatsChild(this);
 
     dead_effect_ = Effect::addEffectChild(nullptr, "assets/effect/1764.png", glm::vec2(0.0f), 2.0f, nullptr);
+    weapon_thunder_ = WeaponThunder::addWeaponThunderChild(this, 2.0f,40.0f);
 }
 
 void Player::handleEvents(SDL_Event &event)
