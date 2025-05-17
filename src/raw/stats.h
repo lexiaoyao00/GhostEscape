@@ -12,7 +12,7 @@ protected:
     float max_health_ = 100.0f;
     float mana_ = 100.0f;
     float max_mana_ = 100.0f;
-    float mana_regen_ = 40.0f;
+    float mana_regen_ = 10.0f;
     float damage_ = 40.0f;
 
 
@@ -22,7 +22,7 @@ protected:
     float invincible_timer_ = 0.0f;
 
 public:
-    static Stats* addStatsChild(Actor* parent, float max_health = 100.0f, float max_mana = 100.0f, float mana_regen = 40.0f, float damage = 40.0f);
+    static Stats* addStatsChild(Actor* parent, float max_health = 100.0f, float max_mana = 100.0f, float mana_regen = 10.0f, float damage = 40.0f);
     virtual void update(float dt) override;
 
     bool canUseMana(float mana_cost);

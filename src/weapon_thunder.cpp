@@ -3,6 +3,24 @@
 #include "core/scene.h"
 #include "core/actor.h"
 
+void WeaponThunder::init()
+{
+    Weapon::init();
+
+    auto scene = game_.getCurrentScene();
+    auto pos = glm::vec2(game_.getScreanSize().x - 300.0f,30.f);
+    hud_skill_ = HUDSkill::addHUDSkillChild(scene,"assets/UI/Electric-Icon.png",pos,0.14f,Anchor::CENTER);
+}
+
+void WeaponThunder::update(float dt)
+{
+    Weapon::update(dt);
+
+    if (hud_skill_){
+        hud_skill_->setPercentage(cooldown_timer_ / cooldown_);
+    }
+}
+
 WeaponThunder *WeaponThunder::addWeaponThunderChild(Actor *parent, float cool_down_, float mana_cost_)
 {
     auto weapon = new WeaponThunder();

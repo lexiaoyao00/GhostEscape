@@ -30,7 +30,7 @@ public:
     // tools
 
     // getters and setters
-    Texture* getTexture() { return &texture_; }
+    Texture getTexture() { return texture_; }
     virtual void setTexture(Texture texture);
     void setFlip(bool is_flip) { texture_.is_flip = is_flip; }
     void setAngle(float angle) { texture_.angle = angle; }

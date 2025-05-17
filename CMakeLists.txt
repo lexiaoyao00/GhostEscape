@@ -50,7 +50,8 @@ add_executable(${TARGET}
                 src/world/effect.cpp
                 src/world/spell.cpp
                 src/screen/UI_mouse.cpp
-                src/screen/hud_stats.cpp)
+                src/screen/hud_stats.cpp
+                src/screen/hud_skill.cpp)
 
 # 链接库
 target_link_libraries(${TARGET}
