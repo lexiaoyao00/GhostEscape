@@ -13,7 +13,6 @@ void Spawner::update(float dt)
     if (timer_ > interval_) {
         timer_ = 0;
         for (int i = 0; i < num_; ++i) {
-            // TODO: spawn enemy
             auto pos = game_.randomVec2(
                 game_.getCurrentScene()->getCameraPosition(),
                 game_.getCurrentScene()->getCameraPosition() + game_.getScreanSize()

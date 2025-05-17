@@ -155,6 +155,26 @@ void Game::renderFillCircle(const glm::vec2 &position, const glm::vec2 &size, fl
     SDL_RenderTexture(renderer_, texture, NULL, &dst);
 }
 
+void Game::renderHBar(const glm::vec2 &position, const glm::vec2 &size, float percent, SDL_FColor color)
+{
+    SDL_SetRenderDrawColorFloat(renderer_, color.r, color.g, color.b, color.a);
+    SDL_FRect boundary_rect = {
+        position.x,
+        position.y,
+        size.x,
+        size.y
+    };
+    SDL_FRect fill_rect = {
+        position.x,
+        position.y,
+        size.x * percent,
+        size.y
+    };
+    SDL_RenderRect(renderer_, &boundary_rect);
+    SDL_RenderFillRect(renderer_, &fill_rect);
+    SDL_SetRenderDrawColorFloat(renderer_, 0, 0, 0, 1);
+}
+
 void Game::drawGrid(const glm::vec2 &top_left, const glm::vec2 &bottom_right, float grid_width, SDL_FColor fcolor)
 {
     SDL_SetRenderDrawColorFloat(renderer_, fcolor.r, fcolor.g, fcolor.b, fcolor.a);

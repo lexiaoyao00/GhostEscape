@@ -3,6 +3,7 @@
 #include "core/scene.h"
 #include "affiliate/collider.h"
 #include "raw/stats.h"
+#include "affiliate/affiliate_bar.h"
 
 Enemy *Enemy::addEnemyChild(Object *parent, glm::vec2 pos, Player *target)
 {
@@ -11,7 +12,8 @@ Enemy *Enemy::addEnemyChild(Object *parent, glm::vec2 pos, Player *target)
     enemy->setPosition(pos);
     enemy->setTarget(target);
 
-    if (parent) parent->safeAddChild(enemy);
+    if (parent)
+        parent->safeAddChild(enemy);
 
     return enemy;
 }
@@ -19,20 +21,23 @@ Enemy *Enemy::addEnemyChild(Object *parent, glm::vec2 pos, Player *target)
 void Enemy::init()
 {
     Actor::init();
-    anim_normal_ = SpriteAnime::addSpriteAnimeChild(this,"assets/sprite/ghost-Sheet.png",2.0f);
-    anim_hurt_ = SpriteAnime::addSpriteAnimeChild(this,"assets/sprite/ghostHurt-Sheet.png",2.0f);
-    anim_dead_ = SpriteAnime::addSpriteAnimeChild(this,"assets/sprite/ghostDead-Sheet.png",2.0f);
+    anim_normal_ = SpriteAnime::addSpriteAnimeChild(this, "assets/sprite/ghost-Sheet.png", 2.0f);
+    anim_hurt_ = SpriteAnime::addSpriteAnimeChild(this, "assets/sprite/ghostHurt-Sheet.png", 2.0f);
+    anim_dead_ = SpriteAnime::addSpriteAnimeChild(this, "assets/sprite/ghostDead-Sheet.png", 2.0f);
     anim_hurt_->setActive(false);
     anim_dead_->setActive(false);
     anim_dead_->setLoop(false);
 
     current_anim_ = anim_normal_;
 
-    collider_ = Collider::addColliderChild(this,anim_normal_->getSize());
+    collider_ = Collider::addColliderChild(this, anim_normal_->getSize());
     stats_ = Stats::addStatsChild(this);
 
-    setType(ObjectType::ENEMY);
+    auto size = anim_normal_->getSize();
+    health_bar_ = AffiliateBar::addAffiliateBarChild(this, glm::vec2(size.x - 10.0f, 10.0f), Anchor::BOTTOM_CENTER);
+    health_bar_->setOffset(health_bar_->getOffset() + glm::vec2(0, size.y / 2 - 5.0f));
 
+    setType(ObjectType::ENEMY);
 }
 
 void Enemy::update(float dt)
@@ -51,21 +56,25 @@ void Enemy::update(float dt)
 
 void Enemy::aimTagert(Player *target)
 {
-    if (target == nullptr) return;
+    if (target == nullptr)
+        return;
     auto direction = target->getPosition() - this->getPosition();
-    direction =glm::normalize(direction);
+    direction = glm::normalize(direction);
     velocity_ = direction * max_speed_;
 }
 
 void Enemy::checkState()
 {
     State new_state;
-    if (stats_->getHealth() <= 0 ) new_state = State::DEAD;
-    else if (stats_->getInvincible()) new_state = State::HURT;
-    else new_state = State::NORMAL;
+    if (stats_->getHealth() <= 0)
+        new_state = State::DEAD;
+    else if (stats_->getInvincible())
+        new_state = State::HURT;
+    else
+        new_state = State::NORMAL;
 
-    if (new_state != current_state_) changeState(new_state);
-
+    if (new_state != current_state_)
+        changeState(new_state);
 }
 
 void Enemy::changeState(State new_state)
@@ -92,12 +101,12 @@ void Enemy::changeState(State new_state)
         break;
     }
     current_state_ = new_state;
-
 }
 
 void Enemy::attack()
 {
-    if (!collider_ || !target_ || target_->getCollider() == nullptr) return;
+    if (!collider_ || !target_ || target_->getCollider() == nullptr)
+        return;
 
     if (collider_->isColliding(target_->getCollider()))
     {
@@ -114,5 +123,4 @@ void Enemy::remove()
     {
         need_remove_ = true;
     }
-
 }

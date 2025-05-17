@@ -44,6 +44,7 @@ add_executable(${TARGET}
                 src/affiliate/sprite.cpp
                 src/affiliate/sprite_anime.cpp
                 src/affiliate/collider.cpp
+                src/affiliate/affiliate_bar.cpp
                 src/raw/stats.cpp
                 src/raw/weapon.cpp
                 src/world/effect.cpp
