@@ -20,6 +20,8 @@ public:
     virtual void render() override;
     virtual void clean() override;
 
+    virtual void takeDamage(float damage) override;
+
     void keyboardControl();
     void syncCamera();
     void checkState();
