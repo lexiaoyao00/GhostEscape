@@ -79,7 +79,7 @@ void Game::init(std::string title, int width, int height)
     current_scene_->init();
 }
 
-void Game::handleEvents()
+bool Game::handleEvents()
 {
     SDL_Event event;
     while (SDL_PollEvent(&event)){
@@ -92,6 +92,7 @@ void Game::handleEvents()
                 break;
         }
     }
+    return is_running_;
 }
 
 void Game::update(float dt)

@@ -15,13 +15,15 @@ protected:
     std::vector<ObjectWorld*> children_world_;  // 世界中的物体
     std::vector<ObjectScreen*> children_screen_; // 屏幕中的物体
 
+    bool is_pause_ = false; // 是否暂停
+
 
 public:
     Scene() = default;
     ~Scene() = default;
 
     virtual void init() override {};
-    virtual void handleEvents(SDL_Event& event) override;
+    virtual bool handleEvents(SDL_Event& event) override;
     virtual void update(float dt) override;
     virtual void render() override;
     virtual void clean() override;
@@ -31,6 +33,9 @@ public:
 
     glm::vec2 worldToScreen(const glm::vec2& world_position) const { return world_position - camera_position_; }
     glm::vec2 screenToWorld(const glm::vec2& screen_position) const { return screen_position + camera_position_; }
+
+    void pause();
+    void resume();
 
     // getters and setters
     glm::vec2 getCameraPosition() const { return camera_position_; }

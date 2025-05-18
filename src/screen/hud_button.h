@@ -20,7 +20,7 @@ public:
         const std::string &normal_file_path, const std::string &hover_file_path, const std::string &press_file_path,
         float scale = 1.0f,Anchor anchor = Anchor::CENTER);
 
-    virtual void handleEvents(SDL_Event& event) override;
+    virtual bool handleEvents(SDL_Event& event) override;
     virtual void update(float dt) override;
 
     void checkHover();

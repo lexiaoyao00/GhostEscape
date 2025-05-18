@@ -34,7 +34,7 @@ WeaponThunder *WeaponThunder::addWeaponThunderChild(Actor *parent, float cool_do
     return weapon;
 }
 
-void WeaponThunder::handleEvents(SDL_Event &event)
+bool WeaponThunder::handleEvents(SDL_Event &event)
 {
     if (event.type == SDL_EVENT_MOUSE_BUTTON_DOWN){
         if (event.button.button == SDL_BUTTON_LEFT){
@@ -43,7 +43,10 @@ void WeaponThunder::handleEvents(SDL_Event &event)
                 auto pos = game_.getMousePosition() + game_.getCurrentScene()->getCameraPosition();
                 auto spell = Spell::addSpellChild(nullptr,"assets/effect/Thunderstrike w blur.png",pos,40.0f,3.0f,Anchor::CENTER);
                 attack(pos,spell);
+
+                return true;
             }
         }
     }
+    return false;
 }

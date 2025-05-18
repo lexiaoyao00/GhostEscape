@@ -54,7 +54,7 @@ public:
 
     void run();                                          // 运行游戏,进入主循环
     void init(std::string title, int width, int height); // 初始化游戏
-    void handleEvents();                                 // 处理事件
+    bool handleEvents();                                 // 处理事件
     void update(float dt);                               // 更新游戏状态
     void render();                                       // 渲染游戏画面
     void clean();                                        // 清理游戏资源
