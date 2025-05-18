@@ -9,6 +9,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 # 设置编译选项
 if (MSVC)
     add_compile_options(/W4)
+    add_compile_options("$<$<C_COMPILER_ID:MSVC>:/utf-8>")
+    add_compile_options("$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")
 else()
     add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
@@ -50,6 +52,7 @@ add_executable(${TARGET}
                 src/raw/stats.cpp
                 src/raw/weapon.cpp
                 src/raw/timer.cpp
+                src/raw/bg_star.cpp
                 src/world/effect.cpp
                 src/world/spell.cpp
                 src/screen/UI_mouse.cpp

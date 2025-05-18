@@ -10,6 +10,7 @@
 #include "screen/hud_button.h"
 #include "scene_title.h"
 #include "raw/timer.h"
+#include "raw/bg_star.h"
 
 #include <fstream>
 
@@ -27,6 +28,8 @@ void SceneMain::init()
     player_->init();
     player_->setPosition(world_size_ / 2.0f);
     addChild(player_);
+
+    BgStar::addBgStarChild(this, 2000, 0.2, 0.5, 0.7);
 
     end_timer_ = Timer::addTimerChild(this);
 

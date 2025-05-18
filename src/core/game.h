@@ -81,6 +81,7 @@ public:
     void renderHBar(const glm::vec2 &position, const glm::vec2 &size, float percent, SDL_FColor color);               // 渲染水平条形进度条
     void drawGrid(const glm::vec2 &top_left, const glm::vec2 &bottom_right, float grid_width, SDL_FColor fcolor);     // 绘制网格
     void drawBoundary(const glm::vec2 &top_left, const glm::vec2 &bottom_right, float grid_width, SDL_FColor fcolor); // 绘制边界
+    void drawPoint(const std::vector<glm::vec2>& points, glm::vec2 render_pos, SDL_FColor fcolor); // 绘制点
 
     // 文字函数
     TTF_Text *creatTTF_Text(const std::string &text, const std::string &font_path, int font_size = 16);
