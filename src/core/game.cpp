@@ -97,7 +97,7 @@ bool Game::handleEvents()
 
 void Game::update(float dt)
 {
-    mouse_buttons_ = SDL_GetMouseState(&mouse_position_.x, &mouse_position_.y);
+    updateMouse();
     current_scene_->update(dt);
 }
 
@@ -239,6 +239,22 @@ std::string Game::loadTextFile(const std::string &path)
         content += line + "\n";
     }
     return content;
+}
+
+void Game::updateMouse()
+{
+    mouse_buttons_ = SDL_GetMouseState(&mouse_position_.x, &mouse_position_.y);
+
+    // 去除黑边,保持比例
+    int w, h;
+    SDL_GetWindowSize(window_, &w, &h);
+    SDL_SetWindowAspectRatio(window_,screan_size_.x / screan_size_.y,screan_size_.x / screan_size_.y);
+    mouse_position_ *= screan_size_ / glm::vec2(w, h);
+
+    // 保持黑边,不限制比例的做法
+    // SDL_FRect rect;
+    // SDL_GetRenderLogicalPresentationRect(renderer_, &rect);
+    // mouse_position_ = (mouse_position_ - glm::vec2(rect.x, rect.y)) * screan_size_ / glm::vec2(rect.w, rect.h);
 }
 
 void Game::drawGrid(const glm::vec2 &top_left, const glm::vec2 &bottom_right, float grid_width, SDL_FColor fcolor)

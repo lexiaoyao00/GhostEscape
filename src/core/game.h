@@ -112,6 +112,9 @@ public:
     {
         return glm::ivec2(randomInt(top_left.x, bottom_right.x), randomInt(top_left.y, bottom_right.y));
     }
+
+private:
+    void updateMouse();
 };
 
 #endif // GAME_H
