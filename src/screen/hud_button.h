@@ -37,6 +37,8 @@ public:
     void setIsTrigger(bool is_trigger) { is_trigger_ = is_trigger; }
     void setIsPress(bool is_press) { is_press_ = is_press; }
     void setIsHover(bool is_hover) { is_hover_ = is_hover; }
+
+    void setScale(float scale);
 };
 
 

@@ -9,6 +9,7 @@
 #include "screen/hud_text.h"
 #include "screen/hud_button.h"
 #include "scene_title.h"
+#include "raw/timer.h"
 
 void SceneMain::init()
 {
@@ -24,6 +25,8 @@ void SceneMain::init()
     player_->init();
     player_->setPosition(world_size_ / 2.0f);
     addChild(player_);
+
+    end_timer_ = Timer::addTimerChild(this);
 
     spawner_ = new Spawner();
     spawner_->init();
@@ -55,6 +58,8 @@ void SceneMain::update(float dt)
     checkButtonPause();
     checkButtonRestart();
     checkButtonBack();
+    if (player_ && !player_->getActive()) end_timer_->start();
+    checkEndTimer();
 }
 
 void SceneMain::render()
@@ -92,6 +97,7 @@ void SceneMain::checkButtonPause()
 void SceneMain::checkButtonRestart()
 {
     if (!hud_button_restart_->getIsTrigger()) return;
+    game_.setScore(0);
     auto scene = new SceneMain();
     game_.safeChangeScene(scene);   // 或者 当前场景 先 clean() 再 init(),但是有风险
 }
@@ -99,6 +105,22 @@ void SceneMain::checkButtonRestart()
 void SceneMain::checkButtonBack()
 {
     if (!hud_button_back_->getIsTrigger()) return;
+    game_.setScore(0);
     auto scene = new SceneTitle();
     game_.safeChangeScene(scene);
+}
+
+void SceneMain::checkEndTimer()
+{
+    if (!end_timer_->timeOut()) return;
+
+    pause();
+    hud_button_restart_->setRenderPosition(game_.getScreanSize() / 2.0f - glm::vec2(200.f, 0.0f));
+    hud_button_restart_->setScale(4.0f);
+    hud_button_back_->setRenderPosition(game_.getScreanSize() / 2.0f + glm::vec2(200.f, 0.0f));
+    hud_button_back_->setScale(4.0f);
+
+    hud_button_pause_->setActive(false);
+
+    end_timer_->stop();
 }

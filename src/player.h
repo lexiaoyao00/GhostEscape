@@ -6,12 +6,15 @@
 #include "world/effect.h"
 #include "weapon_thunder.h"
 
+class Timer;
 class Player : public Actor
 {
     WeaponThunder* weapon_thunder_ = nullptr;
     SpriteAnime* sprite_idle_ = nullptr;
     SpriteAnime* sprite_move_ = nullptr;
     Effect* dead_effect_ = nullptr;
+    Timer* flash_timer_ = nullptr;
+
     bool is_moving_ = false;
 public:
     virtual void init() override;
