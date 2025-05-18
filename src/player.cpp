@@ -20,7 +20,9 @@ void Player::init()
     collider_ = Collider::addColliderChild(this, sprite_idle_->getSize() / 2.0f);
     stats_ = Stats::addStatsChild(this);
 
-    dead_effect_ = Effect::addEffectChild(nullptr, "assets/effect/1764.png", glm::vec2(0.0f), 2.0f, nullptr);
+    dead_effect_ = Effect::addEffectChild(game_.getCurrentScene(), "assets/effect/1764.png", glm::vec2(0.0f), 2.0f, nullptr);
+    dead_effect_->setActive(false);
+
     weapon_thunder_ = WeaponThunder::addWeaponThunderChild(this, 2.0f,40.0f);
 }
 
@@ -133,7 +135,7 @@ void Player::checkIsDead()
 {
     if (!stats_->getAlive())
     {
-        game_.getCurrentScene()->safeAddChild(dead_effect_);
+        dead_effect_->setActive(true);
         dead_effect_->setPosition(getPosition());
         // setNeedRemove(true);
         setActive(false);

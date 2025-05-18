@@ -14,6 +14,7 @@ public:
     static Effect *addEffectChild(Object *parent, const std::string &file_path, glm::vec2 pos, float scale = 1.0f, ObjectWorld *next_object = nullptr);
 
     virtual void update(float dt) override;
+    virtual void clean() override;
 
     // getters and setters
     SpriteAnime *getSpriteAnime() const { return sprite_anime_; }

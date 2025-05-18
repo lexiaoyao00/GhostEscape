@@ -30,7 +30,7 @@ void SceneTitle::init()
     credits_text_->setBgSizeByText();
     credits_text_->setActive(false);
 
-    UIMouse::addUIMouseChild(this,"assets/UI/pointer_c_shaded.png","assets/UI/pointer_c_shaded.png", 1.0f, Anchor::TOP_LEFT);
+    ui_mouse_ = UIMouse::addUIMouseChild(this,"assets/UI/pointer_c_shaded.png","assets/UI/pointer_c_shaded.png", 1.0f, Anchor::TOP_LEFT);
 
 }
 
@@ -55,6 +55,7 @@ void SceneTitle::update(float dt)
     updateColor();
     if (credits_text_->getActive())
     {
+        ui_mouse_->update(dt);
         return;
     }
     Scene::update(dt);

@@ -96,12 +96,16 @@ void Scene::clean()
     for (ObjectScreen *child : children_world_)
     {
         child->clean();
+        delete child;
+        child = nullptr;
     }
     children_world_.clear();
 
     for (ObjectScreen *child : children_screen_)
     {
         child->clean();
+        delete child;
+        child = nullptr;
     }
     children_screen_.clear();
 }

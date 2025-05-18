@@ -137,6 +137,7 @@ void SceneMain::checkEndTimer()
     if (!end_timer_->timeOut()) return;
 
     pause();
+    game_.resumeMusic();
     hud_button_restart_->setRenderPosition(game_.getScreanSize() / 2.0f - glm::vec2(200.f, 0.0f));
     hud_button_restart_->setScale(4.0f);
     hud_button_back_->setRenderPosition(game_.getScreanSize() / 2.0f + glm::vec2(200.f, 0.0f));
