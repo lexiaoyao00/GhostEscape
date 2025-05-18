@@ -3,6 +3,7 @@
 #include "affiliate/sprite_anime.h"
 #include "affiliate/collider.h"
 #include "raw/stats.h"
+#include "affiliate/text_label.h"
 
 void Player::init()
 {
@@ -18,6 +19,7 @@ void Player::init()
 
     dead_effect_ = Effect::addEffectChild(nullptr, "assets/effect/1764.png", glm::vec2(0.0f), 2.0f, nullptr);
     weapon_thunder_ = WeaponThunder::addWeaponThunderChild(this, 2.0f,40.0f);
+    TextLabel::addTextLabelChild(this, "Player","assets/font/VonwaonBitmap-16px.ttf", 16);
 }
 
 void Player::handleEvents(SDL_Event &event)
