@@ -24,12 +24,13 @@ class Game
 
     bool is_running_ = true;         // 游戏是否运行
     Scene *current_scene_ = nullptr; // 当前场景
+    Scene *next_scene_ = nullptr;    // 下一个场景
 
     Uint64 FPS = 60;         // 帧率
     Uint64 frame_delay_ = 0; // 帧延迟,单位纳秒
     float dt_ = 0.0f;        // 帧间隔
 
-    int score_ = 0; // 得分
+    int score_ = 0;      // 得分
     int high_score_ = 0; // 最高分
 
     SDL_Window *window_ = nullptr;         //  窗口
@@ -64,34 +65,39 @@ public:
     AssetStore *getAssetStore() const { return asset_store_; };              // 获取资源管理器
     glm::vec2 getMousePosition() const { return mouse_position_; };          // 获取鼠标位置,相对于屏幕
     SDL_MouseButtonFlags getMouseButtons() const { return mouse_buttons_; }; // 获取鼠标按键状态
-    void setScore(int score); // 设置得分
-    void setHighScore(int high_score) { high_score_ = high_score; } // 设置最高分
-    int getScore() const { return score_; } // 获取得分
-    int getHighScore() const { return high_score_; } // 获取最高分
+    void setScore(int score);                                                // 设置得分
+    void setHighScore(int high_score) { high_score_ = high_score; }          // 设置最高分
+    int getScore() const { return score_; }                                  // 获取得分
+    int getHighScore() const { return high_score_; }                         // 获取最高分
 
+    void addScore(int score);                                   // 增加得分
+    void quit() { is_running_ = false; }                        // 退出游戏
+    void safeChangeScene(Scene *scene) { next_scene_ = scene; } // 安全切换场景
+    void changeScene(Scene *scene);                             // 切换场景
 
-    void addScore(int score);// 增加得分
     // 渲染函数
     void renderTexture(const Texture &texture, const glm::vec2 &position, const glm::vec2 &size, const glm::vec2 &mask = glm::vec2(1.0f)); // 渲染纹理
     void renderFillCircle(const glm::vec2 &position, const glm::vec2 &size, float alpha);
-    void renderHBar(const glm::vec2 &position, const glm::vec2 &size, float percent, SDL_FColor color); // 渲染水平条形进度条
-
-    // 文字函数
-    TTF_Text* creatTTF_Text(const std::string &text, const std::string &font_path, int font_size = 16);
-
-    // 工具函数
+    void renderHBar(const glm::vec2 &position, const glm::vec2 &size, float percent, SDL_FColor color);               // 渲染水平条形进度条
     void drawGrid(const glm::vec2 &top_left, const glm::vec2 &bottom_right, float grid_width, SDL_FColor fcolor);     // 绘制网格
     void drawBoundary(const glm::vec2 &top_left, const glm::vec2 &bottom_right, float grid_width, SDL_FColor fcolor); // 绘制边界
 
+    // 文字函数
+    TTF_Text *creatTTF_Text(const std::string &text, const std::string &font_path, int font_size = 16);
+
+    // 工具函数
+    bool isMouseInRect(const glm::vec2 &top_left, const glm::vec2 &bottom_right); // 判断鼠标是否在矩形内
+    std::string loadTextFile(const std::string &path);                            // 读取文本文件
+
     // 音频函数
-    void playMusic(const std::string &music_path, int loops = -1) { Mix_PlayMusic(asset_store_->getMusic(music_path), loops);} // 播放音乐
-    void playSound(const std::string &sound_path) { Mix_PlayChannel(-1, asset_store_->getSound(sound_path), 0);}                 // 播放音效
-    void stopMusic() { Mix_HaltMusic();}                                             // 停止音乐
-    void stopSound() { Mix_HaltChannel(-1);}                                             // 停止音效
-    void pauseMusic() { Mix_PauseMusic();}                                            // 暂停音乐
-    void pauseSound() { Mix_Pause(-1);}                                            // 暂停音效
-    void resumeMusic() {Mix_ResumeMusic();}                                           // 恢复音乐
-    void resumeSound() { Mix_Resume(-1);}                                           // 恢复音效
+    void playMusic(const std::string &music_path, int loops = -1) { Mix_PlayMusic(asset_store_->getMusic(music_path), loops); } // 播放音乐
+    void playSound(const std::string &sound_path) { Mix_PlayChannel(-1, asset_store_->getSound(sound_path), 0); }               // 播放音效
+    void stopMusic() { Mix_HaltMusic(); }                                                                                       // 停止音乐
+    void stopSound() { Mix_HaltChannel(-1); }                                                                                   // 停止音效
+    void pauseMusic() { Mix_PauseMusic(); }                                                                                     // 暂停音乐
+    void pauseSound() { Mix_Pause(-1); }                                                                                        // 暂停音效
+    void resumeMusic() { Mix_ResumeMusic(); }                                                                                   // 恢复音乐
+    void resumeSound() { Mix_Resume(-1); }                                                                                      // 恢复音效
 
     // 随机数生成函数
     float randomFloat(float min, float max) { return std::uniform_real_distribution<float>(min, max)(gen_); } // 生成随机浮点数

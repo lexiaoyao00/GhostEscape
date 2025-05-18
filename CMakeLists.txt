@@ -34,6 +34,7 @@ add_executable(${TARGET}
                 src/scene_main.cpp
                 src/spawner.cpp
                 src/weapon_thunder.cpp
+                src/scene_title.cpp
                 src/core/actor.cpp
                 src/core/object_affiliate.cpp
                 src/core/object.cpp
@@ -53,7 +54,8 @@ add_executable(${TARGET}
                 src/screen/UI_mouse.cpp
                 src/screen/hud_stats.cpp
                 src/screen/hud_skill.cpp
-                src/screen/hud_text.cpp)
+                src/screen/hud_text.cpp
+                src/screen/hud_button.cpp)
 
 # 链接库
 target_link_libraries(${TARGET}

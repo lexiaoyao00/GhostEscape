@@ -1,15 +1,22 @@
 #include "game.h"
 #include "../scene_main.h"
+#include "../scene_title.h"
 #include "object_screen.h"
 #include "object_world.h"
 #include "actor.h"
 #include "asset_store.h"
 #include "../affiliate/sprite.h"
+#include <fstream>
 
 void Game::run()
 {
     while (is_running_){
         auto start = SDL_GetTicksNS();
+        if (next_scene_)
+        {
+            changeScene(next_scene_);
+            next_scene_ = nullptr;
+        }
         handleEvents();
         update(dt_);
         render();
@@ -68,7 +75,7 @@ void Game::init(std::string title, int width, int height)
     asset_store_ = new AssetStore(renderer_);
 
     // 创建场景
-    current_scene_ = new SceneMain();
+    current_scene_ = new SceneTitle();
     current_scene_->init();
 }
 
@@ -151,6 +158,16 @@ void Game::addScore(int score)
     setScore(score_ + score);
 }
 
+void Game::changeScene(Scene *scene)
+{
+    current_scene_->clean();
+    if (current_scene_ != nullptr){
+        delete current_scene_;
+    }
+    current_scene_ = scene;
+    current_scene_->init();
+}
+
 void Game::renderTexture(const Texture &texture, const glm::vec2 &position, const glm::vec2 &size, const glm::vec2 &mask)
 {
     SDL_FRect src_rect = {
@@ -205,6 +222,22 @@ TTF_Text *Game::creatTTF_Text(const std::string &text, const std::string &font_p
 {
     auto font = asset_store_->getFont(font_path, font_size);
     return TTF_CreateText(ttf_engine_, font, text.c_str(), 0);
+}
+
+bool Game::isMouseInRect(const glm::vec2 &top_left, const glm::vec2 &bottom_right)
+{
+    return mouse_position_.x >= top_left.x && mouse_position_.x <= bottom_right.x && mouse_position_.y >= top_left.y && mouse_position_.y <= bottom_right.y;
+}
+
+std::string Game::loadTextFile(const std::string &path)
+{
+    std::ifstream file(path);
+    std::string line, content;
+
+    while (std::getline(file, line)){
+        content += line + "\n";
+    }
+    return content;
 }
 
 void Game::drawGrid(const glm::vec2 &top_left, const glm::vec2 &bottom_right, float grid_width, SDL_FColor fcolor)

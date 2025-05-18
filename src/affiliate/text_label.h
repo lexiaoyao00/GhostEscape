@@ -23,7 +23,7 @@ public:
     void setFont(const std::string& font_path, int font_size);  // init 后需要立刻调用
     void setFontPath(const std::string& font_path);
     void setFontSize(int font_size);
-    void setText(const std::string& text) { TTF_SetTextString(ttf_text_, text.c_str(), 0); }
+    void setText(const std::string& text);
     std::string getText() const { return ttf_text_->text; }
 
 private:

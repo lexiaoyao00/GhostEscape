@@ -17,6 +17,7 @@ public:
         const std::string& font_path = "assets/font/VonwaonBitmap-16px.ttf", int font_size = 32,
         const std::string& bg_path = "assets/UI/Textfield_01.png", Anchor anchor = Anchor::CENTER);
 
+    void setBgSizeByText(float margin = 50.0f);
     // getters and setters
     void setTextLabel(TextLabel* text_label) { text_labe_ = text_label; }
     void setSpriteBg(Sprite* sprite_bg) { sprite_bg_ = sprite_bg; }
