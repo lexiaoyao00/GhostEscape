@@ -3,10 +3,12 @@
 #include "screen/hud_button.h"
 #include "scene_main.h"
 #include <cmath>
+#include <fstream>
 
 void SceneTitle::init()
 {
     Scene::init();
+    loadData("assets/score.dat");
     SDL_ShowCursor();
     game_.playMusic("assets/bgm/Spooky music.mp3");
     auto size = glm::vec2(game_.getScreanSize().x / 2.0f, game_.getScreanSize().y / 3.0f);
@@ -66,6 +68,17 @@ void SceneTitle::render()
 void SceneTitle::clean()
 {
     Scene::clean();
+}
+
+void SceneTitle::loadData(const std::string &file_path)
+{
+    int high_score = 0;
+    std::ifstream file(file_path, std::ios::binary);
+    if (file.is_open()){
+        file.read(reinterpret_cast<char*>(&high_score), sizeof(high_score));
+        file.close();
+    }
+    game_.setHighScore(high_score);
 }
 
 void SceneTitle::renderBackground()

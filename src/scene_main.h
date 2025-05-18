@@ -29,11 +29,13 @@ public:
     SceneMain() = default;
     ~SceneMain() = default;
 
-    void init() override;
-    bool handleEvents(SDL_Event& event) override;
-    void update(float dt) override;
-    void render() override;
-    void clean() override;
+    virtual void init() override;
+    virtual bool handleEvents(SDL_Event& event) override;
+    virtual void update(float dt) override;
+    virtual void render() override;
+    virtual void clean() override;
+
+    virtual void saveData(const std::string &file_path) override;
 
 private:
     void renderBackground();
