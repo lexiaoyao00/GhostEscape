@@ -29,6 +29,9 @@ class Game
     Uint64 frame_delay_ = 0; // 帧延迟,单位纳秒
     float dt_ = 0.0f;        // 帧间隔
 
+    int score_ = 0; // 得分
+    int high_score_ = 0; // 最高分
+
     SDL_Window *window_ = nullptr;         //  窗口
     SDL_Renderer *renderer_ = nullptr;     // 渲染器
     TTF_TextEngine *ttf_engine_ = nullptr; // 字体引擎
@@ -61,7 +64,13 @@ public:
     AssetStore *getAssetStore() const { return asset_store_; };              // 获取资源管理器
     glm::vec2 getMousePosition() const { return mouse_position_; };          // 获取鼠标位置,相对于屏幕
     SDL_MouseButtonFlags getMouseButtons() const { return mouse_buttons_; }; // 获取鼠标按键状态
+    void setScore(int score); // 设置得分
+    void setHighScore(int high_score) { high_score_ = high_score; } // 设置最高分
+    int getScore() const { return score_; } // 获取得分
+    int getHighScore() const { return high_score_; } // 获取最高分
 
+
+    void addScore(int score);// 增加得分
     // 渲染函数
     void renderTexture(const Texture &texture, const glm::vec2 &position, const glm::vec2 &size, const glm::vec2 &mask = glm::vec2(1.0f)); // 渲染纹理
     void renderFillCircle(const glm::vec2 &position, const glm::vec2 &size, float alpha);

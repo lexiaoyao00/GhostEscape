@@ -138,6 +138,19 @@ void Game::clean()
     SDL_Quit();
 }
 
+void Game::setScore(int score)
+{
+    score_ = score;
+    if (score_ > high_score_){
+        high_score_ = score_;
+    }
+}
+
+void Game::addScore(int score)
+{
+    setScore(score_ + score);
+}
+
 void Game::renderTexture(const Texture &texture, const glm::vec2 &position, const glm::vec2 &size, const glm::vec2 &mask)
 {
     SDL_FRect src_rect = {

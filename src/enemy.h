@@ -19,6 +19,8 @@ class Enemy : public Actor
     SpriteAnime *anim_dead_ = nullptr;
     SpriteAnime *current_anim_ = nullptr;
 
+    int score_ = 10;
+
 public:
     static Enemy *addEnemyChild(Object *parent, glm::vec2 pos, Player *target);
 

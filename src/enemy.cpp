@@ -95,6 +95,7 @@ void Enemy::changeState(State new_state)
     case State::DEAD:
         current_anim_ = anim_dead_;
         current_anim_->setActive(true);
+        game_.addScore(score_);
         break;
 
     default:
